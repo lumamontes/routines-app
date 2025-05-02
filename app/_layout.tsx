@@ -6,12 +6,15 @@ import {
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
-import { useColorScheme } from "@/components/useColorScheme";
 import { Slot } from "expo-router";
+import { useAtom } from 'jotai'
+
 
 import "../global.css";
+import { AppDatabaseProvider } from "@/providers/SQLiteProvider";
+import { userSettingsAtom } from "@/store/atoms";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -44,24 +47,25 @@ export default function RootLayout() {
     }
   }, [loaded]);
 
-  // useLayoutEffect(() => {
-  //   setStyleLoaded(true);
-  // }, [styleLoaded]);
+  useLayoutEffect(() => {
+    setStyleLoaded(true);
+  }, [styleLoaded]);
 
-  // if (!loaded || !styleLoaded) {
-  //   return null;
-  // }
+  if (!loaded || !styleLoaded) {
+    return null;
+  }
 
   return <RootLayoutNav />;
 }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme();
-
+  const [userSettings] = useAtom(userSettingsAtom);
   return (
-    <GluestackUIProvider mode={colorScheme === "dark" ? "dark" : "light"}>
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Slot />
+    <GluestackUIProvider mode={userSettings.theme ? "dark" : "light"}>
+      <ThemeProvider value={userSettings.theme ? DarkTheme : DefaultTheme}>
+        <AppDatabaseProvider>
+          <Slot />
+        </AppDatabaseProvider>
       </ThemeProvider>
     </GluestackUIProvider>
   );
