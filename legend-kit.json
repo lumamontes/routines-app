@@ -1,0 +1,7 @@
+{
+  "basePath": "./legend-kit",
+  "authenticate": true,
+  "tsconfigPath": "./tsconfig.json",
+  "scriptName": "legend",
+  "packageJsonPath": "./package.json"
+}

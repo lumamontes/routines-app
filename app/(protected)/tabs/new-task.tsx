@@ -27,8 +27,6 @@ import { Switch } from '@/components/ui/switch';
 import { FormControl, FormControlError, FormControlErrorText, FormControlLabel } from '@/components/ui/form-control';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useAtom } from 'jotai';
-import { tasksAtom } from '@/store/atoms';
-import * as DB from '@/services/database';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { Ionicons } from '@expo/vector-icons';
@@ -40,6 +38,7 @@ import ColorPicker, {
 } from "reanimated-color-picker";
 import { ChevronDownIcon } from '@/components/ui/icon';
 import { ScreenHeader } from '@/components/ScreenHeader';
+import { tasksAtom } from '@/store/task';
 
 // Definindo o esquema do formulário com Zod
 const taskSchema = z.object({
@@ -153,13 +152,11 @@ const AddTaskScreen = () => {
   const onSubmit = async (data: TaskFormData) => {
     try {
       // Formatar a data para ISO
-      const dateFormatted = DB.formatDateToISO(data.date);
-      
-      // Formatar a hora se existir
-      const timeFormatted = data.time ? DB.formatTimeString(data.time) : undefined;
-
+      const dateFormatted = format(data.date, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx", { locale: ptBR });
+      const timeFormatted = data.time ? format(data.time, 'HH:mm:ss', { locale: ptBR }) : null;
       // Criar a tarefa no banco de dados
-      const newTask = await DB.createTask({
+      const newTask = ({
+        id: `${Date.now()}-${Math.random()}`,
         title: data.title,
         description: data.description,
         completed: data.completed,
@@ -171,7 +168,7 @@ const AddTaskScreen = () => {
         visualAid: data.visualAid,
         color: selectedColor,
         routineId: data.routineId,
-      });
+      })
 
       // Atualizar o átomo de tarefas
       setTasks(async (prev) => [...(await prev), newTask]);

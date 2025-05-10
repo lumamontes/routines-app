@@ -8,7 +8,8 @@
     "ios": "DARK_MODE=media expo start --ios",
     "web": "DARK_MODE=media expo start --web",
     "test": "jest --watchAll",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "legend": "npx @legendapp/kit@latest"
   },
   "jest": {
     "preset": "jest-expo"
@@ -47,10 +48,12 @@
     "@gluestack-ui/tooltip": "^0.1.38",
     "@hookform/resolvers": "^5.0.1",
     "@legendapp/motion": "^2.4.0",
-    "@react-native-async-storage/async-storage": "1.23.1",
+    "@legendapp/state": "^3.0.0-beta.30",
+    "@react-native-async-storage/async-storage": "^1.23.1",
     "@react-native-community/datetimepicker": "8.2.0",
     "@react-navigation/bottom-tabs": "^7.2.0",
     "@react-navigation/native": "^7.0.14",
+    "@xstate/react": "^5.0.3",
     "babel-plugin-module-resolver": "^5.0.2",
     "date-fns": "^4.1.0",
     "expo": "~52.0.25",
@@ -66,7 +69,7 @@
     "expo-symbols": "~0.2.1",
     "expo-system-ui": "~4.0.7",
     "expo-web-browser": "~14.0.2",
-    "jotai": "^2.12.3",
+    "jotai": "^2.12.4",
     "lucide-react": "^0.503.0",
     "lucide-react-native": "^0.503.0",
     "nativewind": "^4.1.23",
@@ -76,6 +79,7 @@
     "react-native": "0.76.6",
     "react-native-css-interop": "^0.1.22",
     "react-native-gesture-handler": "~2.20.2",
+    "react-native-mmkv": "^3.2.0",
     "react-native-reanimated": "~3.16.1",
     "react-native-safe-area-context": "^5.1.0",
     "react-native-screens": "~4.4.0",
@@ -84,7 +88,9 @@
     "react-native-webview": "13.12.5",
     "reanimated-color-picker": "^4.0.1",
     "tailwindcss": "^3.4.17",
-    "zod": "^3.24.3"
+    "uuid": "^11.1.0",
+    "zod": "^3.24.3",
+    "expo-image": "~2.0.7"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
@@ -95,7 +101,7 @@
     "jest-expo": "~52.0.3",
     "jscodeshift": "^0.15.2",
     "react-test-renderer": "18.3.1",
-    "typescript": "^5.3.3"
+    "typescript": "^5.8.3"
   },
   "private": true
 }

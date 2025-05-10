@@ -8,14 +8,10 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
-import { Slot } from "expo-router";
+import { Redirect, Slot } from "expo-router";
 import { useAtom } from 'jotai'
-
-
 import "../global.css";
-import { AppDatabaseProvider } from "@/providers/SQLiteProvider";
-import { userSettingsAtom } from "@/store/atoms";
-
+import { settingsAtom } from "@/store/settings";
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
@@ -59,14 +55,10 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  const [userSettings] = useAtom(userSettingsAtom);
+  const [settings] = useAtom(settingsAtom);
   return (
-    <GluestackUIProvider mode={userSettings.theme ? "dark" : "light"}>
-      <ThemeProvider value={userSettings.theme ? DarkTheme : DefaultTheme}>
-        <AppDatabaseProvider>
-          <Slot />
-        </AppDatabaseProvider>
-      </ThemeProvider>
+    <GluestackUIProvider mode={settings.theme}>
+          <Slot /> : 
     </GluestackUIProvider>
   );
 }

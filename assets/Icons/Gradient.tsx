@@ -33,8 +33,8 @@ const SvgComponent = () => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(222.599 277.706) rotate(90) scale(780.255 715.448)"
         >
-          <Stop offset="0%" stopColor="#5D4178" />
-          <Stop offset="100%" stopColor="#2D1248" stopOpacity="0" />
+          <Stop offset="0%" stopColor="#784175" />
+          <Stop offset="100%" stopColor="#671b59" stopOpacity="0" />
         </RadialGradient>
         <RadialGradient
           id="paint1_radial_2913_5676"
@@ -44,8 +44,8 @@ const SvgComponent = () => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(-82.2838 30.7211) rotate(90) scale(563.717 516.895)"
         >
-          <Stop offset="0%" stopColor="#6212B1" />
-          <Stop offset="100%" stopColor="#220044" stopOpacity="0" />
+          <Stop offset="0%" stopColor="#7017c9" />
+          <Stop offset="100%" stopColor="#4a0391" stopOpacity="0" />
         </RadialGradient>
       </Defs>
     </Svg>

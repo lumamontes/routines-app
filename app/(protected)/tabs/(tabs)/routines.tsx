@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { View, FlatList } from 'react-native';
 import { Clock } from 'lucide-react-native';
 import { useAtom } from 'jotai';
-import { routinesAtom, tasksAtom } from '@/store/atoms';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/components/useColorScheme';
 import { ScreenHeader } from '@/components/ScreenHeader';
 import { RoutineCard } from '@/components/RoutineCard';
 import { EmptyState } from '@/components/EmptyState';
-import { Routine } from '@/services/database';
 import { router } from 'expo-router';
+import { Routine, routinesAtom } from '@/store/routine';
+import { tasksAtom } from '@/store/task';
 
 export default function RoutinesScreen() {
   const [routines] = useAtom(routinesAtom);
@@ -28,7 +28,7 @@ export default function RoutinesScreen() {
   
   const handleAddRoutine = () => {
     // In a more complete app, this would navigate to a routine creation view
-    router.push('/(protected)/tabs/new-routine');
+    // router.push('/(protected)/tabs/new-routine');
   };
 
   const renderItem = ({ item }: { item: Routine }) => (

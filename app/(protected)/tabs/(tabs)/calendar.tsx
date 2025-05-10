@@ -1,20 +1,23 @@
 import React, { useState, useMemo } from 'react';
 import { View, FlatList, Text, TouchableOpacity } from 'react-native';
 import { Calendar as CalendarIcon, ChevronLeft, ChevronRight } from 'lucide-react-native';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import clsx from 'clsx';
-import { tasksAtom } from '@/store/atoms';
-import { Task, toggleTaskCompletion } from '@/services/database';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/components/useColorScheme';
 import { ScreenHeader } from '@/components/ScreenHeader';
 import { TaskCard } from '@/components/TaskCard';
 import { EmptyState } from '@/components/EmptyState';
+import { tasksAtom } from '@/store/task';
 
 const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
+import { toggleTaskCompletion } from '@/store/task';
+import { Task } from '@/store/task';
+
 export default function CalendarScreen() {
   const [tasks, setTasks] = useAtom(tasksAtom);
+  const toggleTaskCompletionAction = useSetAtom(toggleTaskCompletion);
   
   // Get the current date info
   const today = new Date();
@@ -135,8 +138,7 @@ export default function CalendarScreen() {
     // Toggle the task completion status
     const updatedCompleted = !taskToToggle.completed;
     
-    // Update in the database
-    await toggleTaskCompletion(id, updatedCompleted);
+    await toggleTaskCompletionAction(id);
     
     // Update in Jotai state
     setTasks(async (prevTasks) => {

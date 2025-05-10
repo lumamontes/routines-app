@@ -32,8 +32,8 @@ export default function AppLayout() {
         options={{
           headerShown: false,
           presentation: "modal",
-          // headerTitle: "Nova tarefa",
-          // animation: "slide_from_bottom",
+          headerTitle: "Nova tarefa",
+          animation: "slide_from_bottom",
         }}
       />
     </Stack>

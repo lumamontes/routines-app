@@ -21,16 +21,10 @@ import { SelectDragIndicatorWrapper } from '@/components/ui/select';
 import { SelectDragIndicator } from '@/components/ui/select';
 import { SelectItem } from '@/components/ui/select';
 import { SelectBackdrop } from '@/components/ui/select';
-import { VStack } from '@/components/ui/vstack';
-import { HStack } from '@/components/ui/hstack';
 import { Switch } from '@/components/ui/switch';
-import { Box } from '@/components/ui/box';
 import { FormControl, FormControlError, FormControlErrorText, FormControlLabel } from '@/components/ui/form-control';
-import { Icon } from '@/components/ui/icon';
 import { ChevronDownIcon } from '@/components/ui/icon';
-import { useAtom } from 'jotai';
-import { routinesAtom } from '@/store/atoms';
-import * as DB from '@/services/database';
+
 import { Ionicons } from '@expo/vector-icons';
 import ColorPicker, {
   Panel1,
@@ -38,6 +32,8 @@ import ColorPicker, {
   Preview,
   HueSlider,
 } from "reanimated-color-picker";
+import { routinesAtom } from '@/store/routine';
+import { useAtom } from 'jotai';
 
 // Definindo o esquema do formulário com Zod
 const routineSchema = z.object({

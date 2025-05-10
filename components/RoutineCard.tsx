@@ -4,8 +4,8 @@ import { Clock } from 'lucide-react-native';
 import { useAtom } from 'jotai';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/components/useColorScheme';
-import { Routine } from '@/services/database';
-import { tasksAtom } from '@/store/atoms';
+import { Routine } from '@/store/routine';
+import { tasksAtom } from '@/store/task';
 
 interface RoutineCardProps {
   routine: Routine;
