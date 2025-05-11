@@ -8,11 +8,10 @@ export const taskSchema = z.object({
   completed: z.boolean(),
   priority: z.enum(['low', 'medium', 'high']).optional(),
   duration: z.number().min(1).optional(),
-  timeOfDay: z.enum(['morning', 'afternoon', 'evening', 'night']).optional(),
   visualAid: z.string().optional(),
   color: z.string().optional(),
   routineId: z.string().optional(),
   daysOfWeek: z.array(z.number()).optional(),
 });
 
-export type TaskFormData = z.infer<typeof taskSchema>;
+export type Task = z.infer<typeof taskSchema>;

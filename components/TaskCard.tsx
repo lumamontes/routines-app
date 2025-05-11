@@ -2,12 +2,12 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import clsx from 'clsx';
 import { CheckCircleIcon, CircleIcon, Icon } from './ui/icon';
-import { Task } from '@/store/task';
+import { TaskWithId } from '@/store/task';
 
 interface TaskCardProps {
-  task: Task;
+  task: TaskWithId;
   onToggle: (id: string) => void;
-  onPress: (task: Task) => void;
+  onPress: (task: TaskWithId  ) => void;
 }
 
 const getPriorityColor = (priority?: 'low' | 'medium' | 'high') => {
@@ -100,7 +100,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task, onToggle, onPress }) =
             {task.time ? (
               <View className="bg-background-50 px-2 py-1 rounded-full">
                 <Text className="text-xs text-typography-700">
-                  {formatTime(task.time)}
+                  {formatTime(task.time.toISOString())}
                 </Text>
               </View>
             ) : null}

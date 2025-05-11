@@ -19,7 +19,7 @@ export const StepTwo: React.FC = () => {
         <Text className="text-base text-center mb-8">
           Digite seu nome ou apelido para personalizar sua experiência
         </Text>
-        <Input className="mb-2 text-primary-50 border-primary-200 border rounded-xl w-full ">
+        <Input className="mb-2">
           <InputField
             value={username}
             onChangeText={handleUsernameChange}

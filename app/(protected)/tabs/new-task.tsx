@@ -27,8 +27,6 @@ import {
 } from '@/components/ui/form-control';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useSetAtom } from 'jotai';
-import { format } from 'date-fns';
-import { ptBR } from 'date-fns/locale';
 import { Ionicons } from '@expo/vector-icons';
 import { ChevronDownIcon } from '@/components/ui/icon';
 import { tasksAtom } from '@/store/task';
@@ -36,7 +34,7 @@ import { ColorPickerModal } from '@/components/ColorPickerModal';
 import { formatDate, formatTime } from '@/utils/date';
 import { DAY_NAMES } from '@/constants/Time';
 import { SELECTOR_COLORS } from '@/constants/Colors';
-import { TaskFormData, taskSchema } from '@/types/task';
+import { Task, taskSchema } from '@/types/task';
 
 
 const AddTaskScreen = () => {
@@ -54,7 +52,7 @@ const AddTaskScreen = () => {
     formState: { errors },
     setValue,
     watch,
-  } = useForm<TaskFormData>({
+  } = useForm<Task>({
     resolver: zodResolver(taskSchema),
     defaultValues: {
       title: '',
@@ -62,7 +60,6 @@ const AddTaskScreen = () => {
       date: new Date(),
       completed: false,
       priority: 'medium',
-      timeOfDay: 'morning',
       daysOfWeek: []
     },
   });
@@ -83,21 +80,20 @@ const AddTaskScreen = () => {
     }
   };
 
-  const onSubmit = async (data: TaskFormData) => {
+  const onSubmit = async (data: Task) => {
     try {
-      const dateFormatted = format(data.date, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx", { locale: ptBR });
-      const timeFormatted = data.time ? format(data.time, 'HH:mm:ss', { locale: ptBR }) : null;
+      // const dateFormatted = format(data.date, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx", { locale: ptBR });
+      // const timeFormatted = data.time ? format(data.time, 'HH:mm:ss', { locale: ptBR }) : null;
 
       const newTask = {
         id: `${Date.now()}-${Math.random()}`,
         title: data.title,
         description: data.description || '',
         completed: data.completed,
-        date: dateFormatted,
-        time: timeFormatted || '',
+        date: data.date ?? new Date(),
+        time: data.time ?? new Date(),
         priority: data.priority || 'medium',
         duration: data.duration || 0,
-        timeOfDay: data.timeOfDay || 'morning',
         daysOfWeek: selectedDays,
         visualAid: data.visualAid || '',
         color: selectedColor,
@@ -124,10 +120,6 @@ const AddTaskScreen = () => {
           className="p-4"
         >
           <VStack className="space-y-6">
-            <Text className="text-3xl font-extrabold text-primary-700 mb-2 tracking-tight transition-colors duration-300">
-              Nova Tarefa
-            </Text>
-
             <View className="bg-background-0 rounded-2xl shadow-sm p-4 space-y-4 border border-outline-100 transition-colors duration-300">
               <FormControl isInvalid={!!errors.title}>
                 <FormControlLabel>
@@ -294,40 +286,6 @@ const AddTaskScreen = () => {
                 />
               </FormControl>
 
-              <FormControl>
-                <FormControlLabel>
-                  <Text className="text-primary-700 font-semibold mb-1">
-                    Período do Dia
-                  </Text>
-                </FormControlLabel>
-                <Controller
-                  control={control}
-                  name="timeOfDay"
-                  render={({ field: { onChange, value } }) => (
-                    <Select selectedValue={value} onValueChange={onChange}>
-                      <SelectTrigger className="bg-background-50 border border-outline-100 rounded-lg">
-                        <SelectInput placeholder="Selecione o período do dia" />
-                        <SelectIcon>
-                          <ChevronDownIcon className="text-typography-900 dark:text-background-300" />
-                        </SelectIcon>
-                      </SelectTrigger>
-                      <SelectPortal>
-                        <SelectBackdrop />
-                        <SelectContent>
-                          <SelectDragIndicatorWrapper>
-                            <SelectDragIndicator />
-                          </SelectDragIndicatorWrapper>
-                          <SelectItem label="Manhã" value="morning" />
-                          <SelectItem label="Tarde" value="afternoon" />
-                          <SelectItem label="Noite" value="evening" />
-                          <SelectItem label="Madrugada" value="night" />
-                        </SelectContent>
-                      </SelectPortal>
-                    </Select>
-                  )}
-                />
-              </FormControl>
-
               {/* Duração */}
               <FormControl>
                 <FormControlLabel>
@@ -401,7 +359,7 @@ const AddTaskScreen = () => {
             </View>
 
             <Button
-              className="mt-6 bg-primary-700 py-3 rounded-xl shadow-md transition-colors duration-300"
+              className="mt-6 bg-primary-700 rounded-xl shadow-md transition-colors duration-300"
               onPress={handleSubmit(onSubmit)}
             >
               <Text className="text-background-0 text-lg font-bold">Salvar Tarefa</Text>

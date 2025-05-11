@@ -1,7 +1,7 @@
 import { TouchableOpacity, View } from "react-native";
 import { Modal } from "./ui/modal";
 import { Text } from "./ui/text";
-import ColorPicker, { HueSlider, Panel1, Preview, Swatches } from "reanimated-color-picker";
+import ColorPicker, { Swatches } from "reanimated-color-picker";
 
 interface ColorPickerModalProps {
   visible: boolean;
@@ -34,9 +34,6 @@ export const ColorPickerModal: React.FC<ColorPickerModalProps> = ({
             value={initialColor}
             onComplete={onSelect}
           >
-            <Preview />
-            <Panel1 />
-            <HueSlider />
             <Swatches />
           </ColorPicker>
           <View className="flex-row justify-between w-full mt-4">

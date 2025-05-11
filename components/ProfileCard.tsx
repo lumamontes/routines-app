@@ -20,7 +20,7 @@ const ProfileCard = () => {
   const progress = tasks.length > 0 ? (completedTasks / tasks.length) * 100 : 0;
 
   return (
-    <Box className="p-6 bg-background-0 rounded-xl shadow-sm w-full">
+    <Box className="p-6 bg-background-0 rounded-xl shadow-sm w-full border border-primary-0">
       <View className="flex-row items-center justify-between mb-4">
         <View className="flex-row items-center">
           <Avatar size="lg" className="border-2" style={{ borderColor: settings.tintColor }}>
@@ -36,7 +36,7 @@ const ProfileCard = () => {
             <Text className="text-xl font-bold" style={{ color: settings.foregroundColor }}>
               {settings.username}
             </Text>
-            <Text className="text-text-1 text-sm">
+            <Text className="text-text-1 text-sm text-primary-0">
               {completedTasks} de {tasks.length} tarefas completadas
             </Text>
           </View>
@@ -45,8 +45,8 @@ const ProfileCard = () => {
 
       <View className="space-y-2">
         <View className="flex-row justify-between items-center">
-          <Text className="text-text-1 text-sm">Progresso</Text>
-          <Text className="text-text-1 text-sm font-medium">{Math.round(progress)}%</Text>
+          <Text className="text-text-1 text-sm text-primary-0">Progresso</Text>
+          <Text className="text-text-1 text-sm font-medium text-primary-0">{Math.round(progress)}%</Text>
         </View>
         <UserProgressBar tintColor={settings.tintColor} />
       </View>

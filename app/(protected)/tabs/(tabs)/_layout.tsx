@@ -11,9 +11,8 @@ type TabBarIconName = "home" | "tasks" | "exchange";
 
 function TabBarIcon(props: {
   name: TabBarIconName;
-  color: string;
 }) {
-  return <FontAwesome size={18} style={{ marginBottom: -3 }} {...props} />;
+  return <FontAwesome size={18} style={{ marginBottom: -3 }} className="text-primary-0"  {...props} />;
 }
 
 function CustomTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
@@ -48,7 +47,6 @@ function CustomTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
             <View className="items-center">
               <TabBarIcon 
                 name={getIconName(route.name)}
-                color={isFocused ? 'var(--primary-0)' : 'var(--primary-100)'} 
               />
               <Text 
                 className={clsx(
@@ -78,7 +76,7 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Início",
-          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+          tabBarIcon: () => <TabBarIcon name="home"  />,
           headerRight: () => (
             <Button 
               className="bg-primary-0" 
@@ -93,14 +91,14 @@ export default function TabLayout() {
         name="tasks"
         options={{
           title: "Tarefas",
-          tabBarIcon: ({ color }) => <TabBarIcon name="tasks" color={color} />,
+          tabBarIcon: () => <TabBarIcon name="tasks"  />,
         }}
       />
       <Tabs.Screen
         name="settings"
         options={{
           title: "Configurações",
-          tabBarIcon: ({ color }) => <TabBarIcon name="exchange" color={color} />,
+          tabBarIcon: () => <TabBarIcon name="exchange" />,
         }}
       />
     </Tabs>

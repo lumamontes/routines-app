@@ -30,7 +30,6 @@ export default function AppLayout() {
       <Stack.Screen
         name="new-task"
         options={{
-          headerShown: false,
           presentation: "modal",
           headerTitle: "Nova tarefa",
           animation: "slide_from_bottom",

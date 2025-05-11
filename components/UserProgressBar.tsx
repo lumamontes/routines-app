@@ -56,7 +56,7 @@ export default function UserProgressBar({ tintColor }: UserProgressBarProps) {
           ]}
         />
       </Progress>
-      <Text className="text-center mt-1 text-text-1 text-sm">
+      <Text className="text-center mt-1 text-text-1 text-sm text-primary-0">
         {completedItemsToday} / {totalItemsToday}
       </Text>
     </View>

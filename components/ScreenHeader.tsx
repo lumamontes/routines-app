@@ -1,6 +1,10 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Button } from './ui/button';
+import { PlusIcon } from 'lucide-react-native';
+import { Icon } from './ui/icon';
+import { Text } from './ui/text';
 
 interface ScreenHeaderProps {
   title: string;
@@ -48,19 +52,17 @@ export const ScreenHeader: React.FC<ScreenHeaderProps> = ({
         </View>
         
         {onAddPress && (
-          <TouchableOpacity 
-            className="w-12 h-12 rounded-full justify-center items-center shadow "
+          <Button 
+            variant="outline"
+            className="rounded-full"
             onPress={onAddPress}
-            activeOpacity={0.7}
           >
-            <View className="w-10 h-10 rounded-full justify-center items-center bg-primary-0 shadow">
-              <Text 
-                className="text-lg font-semibold"
-              >
-                +
-              </Text>
-            </View>
-          </TouchableOpacity>
+            <Text
+              className="text-primary-0"
+            >
+              Adicionar
+            </Text>
+          </Button>
         )}
       </View>
     </View>

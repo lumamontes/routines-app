@@ -1,24 +1,22 @@
 import React, { useState } from 'react';
-import { View, FlatList, TextInput } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { useAtom, useSetAtom } from 'jotai';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/components/useColorScheme';
 import { ScreenHeader } from '@/components/ScreenHeader';
 import { TaskCard } from '@/components/TaskCard';
 import { EmptyState } from '@/components/EmptyState';
 import { Icon, SearchIcon } from '@/components/ui/icon';
 import { router } from 'expo-router';
-import { tasksAtom, toggleTaskCompletion } from '@/store/task';
-import { Task } from '@/store/task';
+import { tasksAtom, TaskWithId, toggleTaskCompletion } from '@/store/task';
+import { Input, InputField } from '@/components/ui/input';
 
 export default function TasksScreen() {
   const useToggleTaskCompletion = useSetAtom(toggleTaskCompletion);
   const [tasks, setTasks] = useAtom(tasksAtom);
-  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+  const [selectedTask, setSelectedTask] = useState<TaskWithId | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
-  const [filteredTasks, setFilteredTasks] = useState<Task[]>([]);
+  const [filteredTasks, setFilteredTasks] = useState<TaskWithId[]>([]);
 
-  const handleTaskPress = (task: Task) => {
+  const handleTaskPress = (task: TaskWithId) => {
     setSelectedTask(task);
     // In a more complete app, this would navigate to a task detail view
     console.log('Task pressed:', task);
@@ -49,7 +47,7 @@ export default function TasksScreen() {
     });
   };
 
-  const renderItem = ({ item }: { item: Task }) => (
+  const renderItem = ({ item }: { item: TaskWithId }) => (
     <TaskCard
       task={item}
       onToggle={handleToggleTask}
@@ -71,17 +69,14 @@ export default function TasksScreen() {
         title="Todas as Tarefas"
         onAddPress={handleAddTask}
       />
-      <View
-        className="flex-row items-center mx-6 mb-4 rounded-lg p-4 border bg-background-0 border-background-200"
-      >
-        <Icon as={SearchIcon} size={'lg'} className="mr-2 " />
-        <TextInput
-          className="flex-1 text-base text-primary-500"
+      <Input className="flex-row items-center mx-6 mb-4 rounded-lg p-1 border bg-background-0">
+        <Icon as={SearchIcon} size={'lg'} className="mr-2 text-primary-0 " />
+        <InputField
           placeholder="Procurar..."
           value={searchQuery}
           onChangeText={setSearchQuery}
         />
-      </View>
+      </Input>
       {filteredTasks.length > 0 ? (
         <FlatList
           data={filteredTasks}
