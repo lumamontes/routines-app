@@ -26,7 +26,7 @@ export const StepThree: React.FC<StepThreeProps> = ({ openColorPicker }) => {
           Escolha cores para diferenciar suas tarefas e hábitos
         </Text>
 
-        <View className="mb-6 bg-gray-100 dark:bg-gray-800 p-4 rounded-xl">
+        <View className="mb-6 bg-gray-100 w-full dark:bg-gray-800 p-4 rounded-xl">
           <View className="flex-row items-center justify-between mb-2">
             <View className="flex-row items-center">
               <ColorPreview color={defaultTintColor} label="T" />
@@ -41,7 +41,7 @@ export const StepThree: React.FC<StepThreeProps> = ({ openColorPicker }) => {
           </Text>
         </View>
 
-        <View className="mb-8 bg-gray-100 dark:bg-gray-800 p-4 rounded-xl">
+        <View className="mb-8 bg-gray-100 dark:bg-gray-800 p-4 w-full rounded-xl">
           <View className="flex-row items-center justify-between mb-2">
             <View className="flex-row items-center">
               <ColorPreview color={defaultAccentColor} label="A" />

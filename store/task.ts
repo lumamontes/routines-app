@@ -16,6 +16,7 @@ export type Task = {
   visualAid: string
   color: string
   routineId: string | null
+  daysOfWeek: number[]
 }
 
 export type TaskAtom = {
@@ -41,6 +42,7 @@ const content = [
     visualAid: '',
     color: '#FF0000',
     routineId: null,
+    daysOfWeek: [0, 1, 2, 3, 4, 5, 6],
   },
 ]
 

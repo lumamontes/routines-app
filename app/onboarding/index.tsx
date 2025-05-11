@@ -14,7 +14,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import clsx from "clsx";
 import { ProgressDots } from "@/components/ProgressDots";
 import { Text } from "@/components/ui/text";
-type ColorType = "tint" | "foreground";
+
+export type ColorType = "tint" | "foreground";
 
 const OnboardingScreen: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<number>(0);
@@ -31,7 +32,7 @@ const OnboardingScreen: React.FC = () => {
 
   const progressBarStyle = useAnimatedStyle(() => {
     return {
-      width: withTiming(progressWidth.value, { duration: 300 }),
+      width: withTiming(progressWidth.value * width, { duration: 300 }),
     };
   });
 

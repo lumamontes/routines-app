@@ -1,10 +1,8 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import clsx from 'clsx';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/components/useColorScheme';
-import { Task } from '@/services/database';
 import { CheckCircleIcon, CircleIcon, Icon } from './ui/icon';
+import { Task } from '@/store/task';
 
 interface TaskCardProps {
   task: Task;
@@ -12,12 +10,33 @@ interface TaskCardProps {
   onPress: (task: Task) => void;
 }
 
+const getPriorityColor = (priority?: 'low' | 'medium' | 'high') => {
+  switch (priority) {
+    case 'high':
+      return 'bg-error-50';
+    case 'medium':
+      return 'bg-warning-50';
+    case 'low':
+      return 'bg-success-50';
+    default:
+      return 'bg-primary-50';
+  }
+};
+
+const getPriorityTextColor = (priority?: 'low' | 'medium' | 'high') => {
+  switch (priority) {
+    case 'high':
+      return 'text-error-700';
+    case 'medium':
+      return 'text-warning-700';
+    case 'low':
+      return 'text-success-700';
+    default:
+      return 'text-primary-700';
+  }
+};
+
 export const TaskCard: React.FC<TaskCardProps> = ({ task, onToggle, onPress }) => {
-  const colorScheme = useColorScheme() ?? 'light';
-  const textColor = Colors[colorScheme].text;
-  const iconColor = Colors[colorScheme].icon;
-  const tintColor = Colors[colorScheme].tint;
-  
   const formatTime = (time?: string) => {
     if (!time) return '';
     
@@ -30,40 +49,26 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task, onToggle, onPress }) =
     return `${formattedHour}:${minutes} ${ampm}`;
   };
 
-  const getPriorityColor = (priority?: 'low' | 'medium' | 'high') => {
-    switch (priority) {
-      case 'high':
-        return '#ef4444'; // red-500
-      case 'medium':
-        return '#f59e0b'; // amber-500
-      case 'low':
-        return '#10b981'; // emerald-500
-      default:
-        return tintColor;
-    }
-  };
-
   return (
     <TouchableOpacity
       className={clsx(
-        "bg-white dark:bg-gray-800 rounded-lg p-4 my-2 shadow border border-gray-200 dark:border-gray-700",
-        task.completed && "opacity-70 bg-gray-100 dark:bg-gray-900"
+        "bg-background-0 rounded-xl p-4 my-2 shadow-sm border border-outline-200",
+        task.completed && "bg-background-50"
       )}
       onPress={() => onPress(task)}
       activeOpacity={0.7}
     >
       <View className="flex-row items-center">
-        <View className="mr-2">
+        <View className="mr-3">
           <TouchableOpacity
             className="p-1"
             onPress={() => onToggle(task.id)}
             hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           >
             {task.completed ? (
-              // <CheckCircle size={24} color="#10b981" />
-              <Icon as={CheckCircleIcon} size={'md'} color={tintColor} className="text-green-500" />
+              <Icon as={CheckCircleIcon} size={'md'} className="text-success-700" />
             ) : (
-              <Icon as={CircleIcon} size={'md'} color={iconColor} className="text-gray-400" />
+              <Icon as={CircleIcon} size={'md'} className="text-primary-700" />
             )}
           </TouchableOpacity>
         </View>
@@ -72,9 +77,8 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task, onToggle, onPress }) =
           <Text 
             className={clsx(
               "text-base font-semibold mb-1",
-              task.completed && "line-through"
+              task.completed ? "text-typography-400 line-through" : "text-typography-900"
             )}
-            style={{ color: task.completed ? iconColor : textColor }}
             numberOfLines={1}
           >
             {task.title}
@@ -83,35 +87,40 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task, onToggle, onPress }) =
           {task.description ? (
             <Text 
               className={clsx(
-                "text-sm mb-1",
-                task.completed && "line-through"
+                "text-sm mb-2",
+                task.completed ? "text-typography-300 line-through" : "text-typography-700"
               )}
-              style={{ color: iconColor }}
               numberOfLines={2}
             >
               {task.description}
             </Text>
           ) : null}
           
-          <View className="flex-row items-center mt-1">
+          <View className="flex-row items-center flex-wrap gap-2">
             {task.time ? (
-              <Text className="text-xs mr-4" style={{ color: iconColor }}>
-                {formatTime(task.time)}
-              </Text>
+              <View className="bg-background-50 px-2 py-1 rounded-full">
+                <Text className="text-xs text-typography-700">
+                  {formatTime(task.time)}
+                </Text>
+              </View>
             ) : null}
             
             {task.duration ? (
-              <Text className="text-xs mr-4" style={{ color: iconColor }}>
-                {task.duration} min
-              </Text>
+              <View className="bg-background-50 px-2 py-1 rounded-full">
+                <Text className="text-xs text-typography-700">
+                  {task.duration} min
+                </Text>
+              </View>
             ) : null}
             
             {task.priority ? (
               <View 
-                className="px-2 py-0.5 rounded-full"
-                style={{ backgroundColor: getPriorityColor(task.priority) }}
+                className={clsx(
+                  "px-2 py-1 rounded-full",
+                  getPriorityColor(task.priority as 'low' | 'medium' | 'high')
+                )}
               >
-                <Text className="text-xs text-white">
+                <Text className={clsx("text-xs font-medium", getPriorityTextColor(task.priority as 'low' | 'medium' | 'high'))}>
                   {task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
                 </Text>
               </View>
@@ -120,10 +129,10 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task, onToggle, onPress }) =
         </View>
         
         {task.visualAid ? (
-          <View className="ml-2">
+          <View className="ml-3">
             <Image 
               source={{ uri: task.visualAid }} 
-              className="w-12 h-12 rounded"
+              className="w-14 h-14 rounded-lg"
               resizeMode="cover"
             />
           </View>

@@ -1,36 +1,88 @@
-# Welcome to your Expo app 👋
+# Tarefitas
 
-This is an [Expo](https://expo.dev) project created with [`create-gluestack-app`](https://www.npmjs.com/package/create-gluestack).
+A React Native task management application built with Expo, TypeScript, and Jotai for state management.
 
-## Get started
+## 🚀 Features
 
-1. Start the app
+- Task management with priorities and due dates
+- Daily routines and habits tracking
+- Dark/Light mode support
+- Offline-first with AsyncStorage
+- Beautiful UI with Gluestack UI components
 
-   ```bash
-    npm run start
-   ```
+## 🛠 Tech Stack
 
-In the output, you'll find options to open the app in a
+- React Native with Expo
+- TypeScript
+- Jotai for state management
+- Gluestack UI for components
+- NativeWind for styling
+- React Hook Form with Zod validation
+- Expo Router for navigation
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 📦 Installation
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/tarefitas.git
+cd tarefitas
+```
 
-## Learn more
+2. Install dependencies:
+```bash
+npm install
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+3. Start the development server:
+```bash
+npm start
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-- [Nativewind](https://www.nativewind.dev/): Nativewind is a utility-first library for building native apps with Tailwind CSS.
-- [Gluestack](https://gluestack.io/): Gluestack is a component library for building native apps with Tailwind CSS.
+## 🎯 Available Scripts
 
-## Join the community
+- `npm start` - Start the Expo development server
+- `npm run android` - Start the app on Android
+- `npm run ios` - Start the app on iOS
+- `npm run web` - Start the app on web
+- `npm test` - Run tests
+- `npm run lint` - Run ESLint
+- `npm run lint:fix` - Fix ESLint issues
+- `npm run format` - Format code with Prettier
+- `npm run format:check` - Check code formatting
 
-Join our community of developers creating universal apps.
+## 🏗 Project Structure
 
-- [gluestack-ui on GitHub](https://github.com/gluestack/gluestack-ui): View our open source ui library and contribute.
-- [gluestack community](https://discord.com/channels/1050761204852858900/1336392784168484914): Chat with gluestack users and ask questions.
+```
+tarefitas/
+├── app/                 # Expo Router app directory
+├── assets/             # Static assets
+├── components/         # Reusable components
+├── constants/          # App constants
+├── hooks/             # Custom hooks
+├── store/             # Jotai atoms and state management
+└── types/             # TypeScript type definitions
+```
+
+## 📝 Code Style
+
+This project uses:
+- ESLint for code linting
+- Prettier for code formatting
+- TypeScript for type safety
+
+To maintain code quality:
+1. Run `npm run lint` before committing
+2. Run `npm run format` to format your code
+3. Fix any TypeScript errors before committing
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

@@ -58,7 +58,7 @@ function RootLayoutNav() {
   const [settings] = useAtom(settingsAtom);
   return (
     <GluestackUIProvider mode={settings.theme}>
-          <Slot /> : 
+          <Slot />
     </GluestackUIProvider>
   );
 }

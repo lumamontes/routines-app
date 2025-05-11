@@ -44,15 +44,15 @@ export default function Home() {
         {/* Buttons Section */}
         <View className="flex-row justify-center gap-4 mb-8">
           <Link href="/onboarding" asChild>
-            <Button className="bg-primary-500 py-3 px-6 rounded-full shadow-md">
+            <Button className="bg-primary-500 md:py-3 md:px-6 rounded-full shadow-md">
               <ButtonText className="font-semibold text-base">
                 COMEÇAR
               </ButtonText>
             </Button>
           </Link>
 
-          <Link href="/" asChild>
-            <Button className="bg-transparent py-3 px-6 rounded-full border-2 border-primary-500">
+          <Link href="/(protected)/tabs/(tabs)" asChild>
+            <Button className="bg-transparent md:py-3 md:px-6 rounded-full border-2 border-primary-500">
               <ButtonText className="text-primary-500 font-semibold text-base">
                 PULAR
               </ButtonText>
