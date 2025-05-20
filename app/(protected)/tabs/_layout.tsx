@@ -9,15 +9,23 @@ export const unstable_settings = {
 };
 
 import { Stack } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function AppLayout() {
   return (
-    <Stack>
-      <Stack.Screen
+    <Stack
+    >
+      <SafeAreaView style={{ flex: 1 }}> 
+
+      <Stack.Screen 
         name="(tabs)"
         options={{
-          headerShown: false,
+          headerTitle: 'Tarefitas',
+          headerTitleStyle: {
+            fontFamily: 'Poppins-Bold',
+          },
         }}
+
       />
       <Stack.Screen
         name="settings"
@@ -35,6 +43,7 @@ export default function AppLayout() {
           animation: "slide_from_bottom",
         }}
       />
+      </SafeAreaView>
     </Stack>
   );
 }

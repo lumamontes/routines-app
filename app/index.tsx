@@ -26,7 +26,7 @@ export default function Home() {
           </View>
 
           <Text className="text-3xl font-semibold text-center text-primary-900 dark:text-primary-100 mb-4">
-            Bem-vindo(a) ao Tarefitas
+            Bem-vindo(a) ao Tarefitas!
           </Text>
 
           <View className="h-0.5 bg-primary-400 dark:bg-primary-400 my-6 w-1/3 mx-auto" />
@@ -46,7 +46,7 @@ export default function Home() {
           <Link href="/onboarding" asChild>
             <Button className="bg-primary-500 md:py-3 md:px-6 rounded-full shadow-md">
               <ButtonText className="font-semibold text-base">
-                COMEÇAR
+                Começar
               </ButtonText>
             </Button>
           </Link>
@@ -54,7 +54,7 @@ export default function Home() {
           <Link href="/(protected)/tabs/(tabs)" asChild>
             <Button className="bg-transparent md:py-3 md:px-6 rounded-full border-2 border-primary-500">
               <ButtonText className="text-primary-500 font-semibold text-base">
-                PULAR
+                Pular
               </ButtonText>
             </Button>
           </Link>

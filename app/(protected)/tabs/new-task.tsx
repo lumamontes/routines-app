@@ -6,6 +6,7 @@ import {
   Platform,
   KeyboardAvoidingView,
   Alert,
+  SafeAreaView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useForm, Controller } from 'react-hook-form';
@@ -109,6 +110,7 @@ const AddTaskScreen = () => {
   };
 
   return (
+    <SafeAreaView style={{ flex: 1 }}>
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={{ flex: 1 }}
@@ -375,6 +377,7 @@ const AddTaskScreen = () => {
         />
       </View>
     </KeyboardAvoidingView>
+      </SafeAreaView>
   );
 };
 

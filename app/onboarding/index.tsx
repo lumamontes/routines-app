@@ -8,7 +8,7 @@ import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useAtom } from "jotai";
 import { useEffect, useRef, useState } from "react";
-import { Platform, ScrollView, TouchableOpacity, useWindowDimensions, View } from "react-native";
+import { KeyboardAvoidingView, Platform, ScrollView, TouchableOpacity, useWindowDimensions, View } from "react-native";
 import Animated, { useSharedValue, withTiming, useAnimatedStyle } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
 import clsx from "clsx";
@@ -112,18 +112,22 @@ const OnboardingScreen: React.FC = () => {
           </TouchableOpacity>
         </View>
       </View>
-
-      <ScrollView
-        ref={scrollViewRef}
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        style={{ flex: 1 }}
-      >
-        <StepOne />
-        <StepTwo />
-        <StepThree openColorPicker={openColorPicker} />
-      </ScrollView>
+        <KeyboardAvoidingView style={{ flex: 1 }}>
+          <ScrollView
+            ref={scrollViewRef}
+            horizontal
+            keyboardShouldPersistTaps="handled"
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+            style={{ flex: 1 }}
+            contentContainerStyle={{ flexGrow: 1 }}
+            scrollEventThrottle={16}
+          >
+            <StepOne />
+            <StepTwo />
+            <StepThree openColorPicker={openColorPicker} />
+          </ScrollView>
+        </KeyboardAvoidingView>
 
       <View className="p-4 border-t border-gray-200 dark:border-gray-800">
         <TouchableOpacity

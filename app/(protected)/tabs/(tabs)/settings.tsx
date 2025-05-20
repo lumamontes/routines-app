@@ -9,7 +9,7 @@ import { useSettings } from "@/hooks/useSettings";
 import { settingsAtom } from "@/store/settings";
 import { useAtom } from "jotai";
 import { useState } from "react";
-import { TouchableOpacity, View } from "react-native";
+import { TextInput, TouchableOpacity, View } from "react-native";
 
 export default function SettingsScreen() {
   const {
@@ -52,18 +52,17 @@ export default function SettingsScreen() {
         <Text className="text-sm text-gray-500 dark:text-gray-400 mb-2">
             Seu nome ou apelido
         </Text>
-        <Input className="mb-2 text-primary-50 border-primary-200 border rounded-xl w-full ">
-          <InputField
+        <Input className="text-primary-50 w-full  ">
+          <TextInput
             value={username}
             onChangeText={handleUsernameChange}
-            placeholder="Seu nome ou apelido"
-            className="text-primary-100"
+            className="w-full "
             placeholderTextColor="#9ca3af"
           />
         </Input>
         </View>
 
-        <View>
+        <View className="flex-row items-center justify-between">
           <Text className="text-sm text-gray-500 dark:text-gray-400 mb-2">
             Tema {isDarkMode ? "Escuro" : "Claro"}
           </Text>

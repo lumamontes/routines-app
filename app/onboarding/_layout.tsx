@@ -13,7 +13,7 @@ import { Redirect, Stack } from "expo-router";
 import { useAtom } from "jotai";
 
 export default function OnboardingLayout() {
-  const [settings ] = useAtom(settingsAtom);
+  const [settings] = useAtom(settingsAtom);
 
   // if(!settings.isOnboarding){
   //   return <Redirect href="/(protected)/tabs/(tabs)" />
